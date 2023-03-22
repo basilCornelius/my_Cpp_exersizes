@@ -1,0 +1,35 @@
+﻿  main.cpp
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(76,57): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(109,14): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(159,15): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(272,16): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(273,19): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(351,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(352,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(618,18): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(620,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(625,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(632,17): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(660,30): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(661,31): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(668,20): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(682,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(766,15): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(767,16): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(768,5): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(770,26): warning C4305: +=: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(890,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(910,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(912,22): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(922,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(935,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(947,21): warning C4018: <: несоответствие типов со знаком и без знака
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(948,23): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(970,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(975,26): warning C4305: инициализация: усечение из "double" в "float"
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(1033,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(1061,21): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\normalTasks.h(414,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+E:\!MY\c++\exersizes\exersizes\exersizes\main.cpp(137,11): warning C4101: task: неиспользованная локальная переменная
+E:\!MY\c++\exersizes\exersizes\exersizes\main.cpp(202,10): warning C4101: task: неиспользованная локальная переменная
+  exersizes.vcxproj -> E:\!MY\c++\exersizes\exersizes\x64\Debug\exersizes.exe
