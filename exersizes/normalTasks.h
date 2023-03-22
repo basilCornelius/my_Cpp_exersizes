@@ -445,7 +445,7 @@ void stringMorpher() {
 	do {
 		std::cout << "enter string (250 chars max): ";
 		std::cin >> entered; // вводим строку
-		if (entered.size() > 250) { // провер€ем размер
+		if (entered.size() > 250) { // провер€ем размер.
 			entered.clear();
 			std::cout << "entered string contents more that 250 symbols" << std::endl;
 		}
