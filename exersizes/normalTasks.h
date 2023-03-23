@@ -439,21 +439,29 @@ void stringMorpher() {
 		<< "Normal dificulty -> TASK 8:\n"
 		"Enter string and modify it described ways." << std::endl
 		<< std::endl;
+	/*
+	Идея такая: вводится строка через getline, потом введенное дробится на слова по пробелам.
+	Почел чего с вектором слов производятся соответствующие манипуляции. Фунции модификации слов 
+	опишу прямо здесь, в этой функции.
+	*/
+	char entered[256]; // место для ввода
+	std::string word;  // слово
+	std::vector <std::string> text; // контейнер для итоговой фразы
+	char command = 0; // команда для выбора модификации
+	//ввод
+	std::cin.clear();
+	std::cin.ignore(); // очистить поток от предыдущих вводов (меню)
+	std::cout << "Enter text (255 chars max): ";
+	std::cin.getline(entered, 255); // введено
+	// разделяем на слова
 
-	std::string entered;
-	char command;
-	do {
-		std::cout << "enter string (250 chars max): ";
-		std::cin >> entered; // вводим строку
-		if (entered.size() > 250) { // проверяем размер.
-			entered.clear();
-			std::cout << "entered string contents more that 250 symbols" << std::endl;
-		}
-		else {
-			break;
-		}
-	} while (true);
+	
+	std::cout << "Entered is: "; // вывод введенного (проверка)
+	for (size_t i = 0; i < text.size(); i++) { 
+		std::cout << text[i] << ' ';
+	}
 
+	std::cout << std::endl; // меню действий с введенной строкой
 	std::cout << "\nSelect modificator:"
 		<< "\n'1' - CAPS"
 		<< "\n'2' - low register"
@@ -462,17 +470,6 @@ void stringMorpher() {
 		<< "\n'5' - First letter is capitalised"
 		<< "\n 'x' or 'X' - finish"
 		<< std::endl;
-	do {
-		std::cout << "Choose modification: ";
-		std::cin >> command;
-		if (
-			command != '1' 
-			|| command != '2'
-			|| command != '3'
 
-			) {
-
-		}
-	} while (true);
 
 }

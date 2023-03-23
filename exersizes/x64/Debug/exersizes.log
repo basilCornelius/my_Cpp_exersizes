@@ -31,5 +31,5 @@ E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(1033,16): warning C4244: и
 E:\!MY\c++\exersizes\exersizes\exersizes\easyTasks.h(1061,21): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
 E:\!MY\c++\exersizes\exersizes\exersizes\normalTasks.h(414,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
 E:\!MY\c++\exersizes\exersizes\exersizes\main.cpp(137,11): warning C4101: task: неиспользованная локальная переменная
-E:\!MY\c++\exersizes\exersizes\exersizes\main.cpp(202,10): warning C4101: task: неиспользованная локальная переменная
+E:\!MY\c++\exersizes\exersizes\exersizes\main.cpp(203,10): warning C4101: task: неиспользованная локальная переменная
   exersizes.vcxproj -> E:\!MY\c++\exersizes\exersizes\x64\Debug\exersizes.exe
