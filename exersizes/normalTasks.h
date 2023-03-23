@@ -5,6 +5,7 @@
 #include <fstream>
 #include "fineEnterFunctions.h"
 #include <vector>
+#include "ctype.h"
 
 
 //ЗАДАЧА 1
@@ -444,7 +445,8 @@ void stringMorpher() {
 	Почел чего с вектором слов производятся соответствующие манипуляции. Фунции модификации слов 
 	опишу прямо здесь, в этой функции.
 	*/
-	char entered[256]; // место для ввода
+	char ch = 0; // место для ввода
+	int counter = 0;
 	std::string word;  // слово
 	std::vector <std::string> text; // контейнер для итоговой фразы
 	char command = 0; // команда для выбора модификации
@@ -452,14 +454,21 @@ void stringMorpher() {
 	std::cin.clear();
 	std::cin.ignore(); // очистить поток от предыдущих вводов (меню)
 	std::cout << "Enter text (255 chars max): ";
-	std::cin.getline(entered, 255); // введено
-	// разделяем на слова
-
-	
-	std::cout << "Entered is: "; // вывод введенного (проверка)
-	for (size_t i = 0; i < text.size(); i++) { 
-		std::cout << text[i] << ' ';
-	}
+	while (ch != '\n') {
+		std::cin.get(ch);
+		counter++;
+		if (ch == ' ' || ch == '\n') {
+			text.push_back(word);
+			word.clear();
+		}
+		else {
+			word += ch;
+		}
+		if (counter == 255) {
+			std::cout << "\nlimit 255 symbols reached." << std::endl;
+			break;
+		}
+	};
 
 	std::cout << std::endl; // меню действий с введенной строкой
 	std::cout << "\nSelect modificator:"
@@ -470,6 +479,37 @@ void stringMorpher() {
 		<< "\n'5' - First letter is capitalised"
 		<< "\n 'x' or 'X' - finish"
 		<< std::endl;
-
-
+	std::cout << "Enter modificator: ";
+	do { // команда вводится пока не будет нужное значение
+		std::cin >> command;
+		if (command == '1') { // если 1
+			for (std::string wrd : text) {
+				for (char letter : wrd) {
+					letter = toupper(letter);
+					std::cout << letter;
+				}
+				std::cout << ' ';
+			}
+			break;
+		}
+		else if (command == '2') { // если 2
+			break;
+		}
+		else if (command == '3') { // если 3
+			break;
+		}
+		else if (command == '4') { // если 4
+			break;
+		}
+		else if (command == '5') { // если 5
+			break;
+		}
+		else if (command == 'x' || command == 'X') { // если 'x' или 'X'
+			break;
+		}
+		else { //если иное
+			std::cout << "Commands you can enter are: 1, 2, 3, 4, 5 or x. Reenter: ";
+		}
+	} while (true);
+	
 }
