@@ -5,6 +5,7 @@
 #include <fstream>
 #include "fineEnterFunctions.h"
 #include <vector>
+#include <map> 
 #include "ctype.h"
 
 
@@ -446,7 +447,9 @@ void stringMorpher() {
 	опишу прямо здесь, в этой функции.
 	*/
 	char ch = 0; // место для ввода
-	int counter = 0;
+	int counter = 0; // счетчик символов
+	bool isFirstChar = false; // Понадобится, когда менять регистр первых букв
+	bool isVeryFirstChar = true; // первая буква предложения
 	std::string word;  // слово
 	std::vector <std::string> text; // контейнер для итоговой фразы
 	char command = 0; // команда для выбора модификации
@@ -469,47 +472,167 @@ void stringMorpher() {
 			break;
 		}
 	};
-
-	std::cout << std::endl; // меню действий с введенной строкой
-	std::cout << "\nSelect modificator:"
-		<< "\n'1' - CAPS"
-		<< "\n'2' - low register"
-		<< "\n'3' - Every Word Is Capitalised"
-		<< "\n'4' - eVERY fIRST sYMBOL iN lOW rEGISTER"
-		<< "\n'5' - First letter is capitalised"
-		<< "\n 'x' or 'X' - finish"
-		<< std::endl;
-	std::cout << "Enter modificator: ";
-	do { // команда вводится пока не будет нужное значение
-		std::cin >> command;
-		if (command == '1') { // если 1
-			for (std::string wrd : text) {
-				for (char letter : wrd) {
-					letter = toupper(letter);
+	// меню действий
+	// повторяем, пока не будет нажата команда "закончить"
+	do {
+		std::cout << std::endl; // меню действий с введенной строкой
+		std::cout << "\nSelect modificator:"
+			<< "\n'1' - CAPS"
+			<< "\n'2' - low register"
+			<< "\n'3' - Every Word Is Capitalised"
+			<< "\n'4' - eVERY fIRST sYMBOL iN lOW rEGISTER"
+			<< "\n'5' - First letter is capitalised"
+			<< "\n 'x' or 'X' - finish"
+			<< std::endl;
+		// Ввод команды
+		std::cout << "Enter modificator: ";
+		do { // команда вводится пока не будет нужное значение
+			std::cin >> command;
+			if (command == '1', '2', '3', '4', '5', 'x', 'X') {
+				break;
+			}
+			else {
+				std::cout << "Wrong command. Use numbers 1 -5 to choose action or 'x' to finish. Enter again: ";
+			}
+		} while (true);
+		// Если Х - до свиданья
+		if (command == 'x' || command == 'X') {
+			break;
+		}
+		// модификация строки
+		std::cout << std::endl; // отступить на строку
+		for (std::string wrd : text) { // перебираем слова
+			isFirstChar = true; // каждое новое слово начинается с первой буквы. Логично? логично..
+			for (char letter : wrd) { // перебираем буквы
+				if (command == '1') {
+					letter = toupper(letter); // каждая буква в верхний регистр
 					std::cout << letter;
 				}
-				std::cout << ' ';
+				if (command == '2') { // каждая буква слова в нижний регистр
+					letter = tolower(letter);
+					std::cout << letter;
+				}
+				if (command == '3' || command == '4') { // каждая первая буква каждого слова в верхний или нижний регистр, а остальные - наоборот
+					if (isFirstChar) {
+						command == '3' ? letter = toupper(letter) : letter = tolower(letter);
+						std::cout << letter;
+						isFirstChar = false;
+					}
+					else {
+						command == '3' ? letter = tolower(letter) : letter = toupper(letter);
+						std::cout << letter;
+					}
+				}
+				if (command == '5') { // Заглавная первая буква предложения
+					isVeryFirstChar ? letter = toupper(letter) : letter = tolower(letter); // Если это первая буква предлоежния, переводим в верхний регистр. Иначе - в нижний. 
+					std::cout << letter; // вывод
+					letter == '.' || letter == '!' || letter == '?' ? isVeryFirstChar = true : isVeryFirstChar = false; // если символ закрывал предложение, то следующий символ - заглавная
+				}
 			}
-			break;
+			std::cout << ' ';
 		}
-		else if (command == '2') { // если 2
-			break;
+		std::cout << std::endl << "Do you whant modify this string again& (y/n): " << std::endl; // предлагаем провернуть все это еще раз
+
+	} while (command != 'n' || command != 'N');
+}
+
+// Задача 9
+/*
+Составить программу, которая будет генерировать случайные числа в интервале [a;b] и заполнять ими двумерный массив размером 10 на 10.
+Числа с тремя знаками после точки. 
+В массиве необходимо найти номер строки с минимальным элементом. Поменять строки массива местами, строку с минимальным элементом и первую строку массива. 
+Организовать удобный вывод на экран.
+*/
+void tenArray() {
+	clearAndRewrite("Normal dificulty->TASK 9:\n" // функция позволяет очищать экран, переписывая условие и номер задачи. 
+		"Generate 10x10 array< using random values from entered range.\n"
+	"Then find minimal value and swap this row with first");
+	srand(time(NULL)); // зерно
+	float arr[10][10]; // массив
+	int min = 0;
+	int max = 0;
+	float bufferRow[10]; // строка
+	int rowNumber = 0; // номер строки-кандидата на наименьшее значение
+	float savedMinimal = 0.0; // кандидат на наименьшее значение. 
+	float isFirst = true; // если это первое значение массива.
+
+	do { // ввод с проверкой на правильность
+		min = enterInt("nter minimal value") * 1000; // минимальное значение
+		max = enterInt("Enter maximal value") * 1000; // максимальное значение
+		if (min > max) {
+			std::cout << "Wrong data: minimum > maximum. Reenter." << std::endl;
 		}
-		else if (command == '3') { // если 3
+		else {
 			break;
-		}
-		else if (command == '4') { // если 4
-			break;
-		}
-		else if (command == '5') { // если 5
-			break;
-		}
-		else if (command == 'x' || command == 'X') { // если 'x' или 'X'
-			break;
-		}
-		else { //если иное
-			std::cout << "Commands you can enter are: 1, 2, 3, 4, 5 or x. Reenter: ";
 		}
 	} while (true);
-	
+
+	// заполняется массив
+	int current = 0; // значение для вставки в массив
+	for (size_t row = 0; row < 10; row++) {
+		for (size_t col = 0; col < 10; col++) {
+			current = min + rand() % (max - min);
+			arr[row][col] = float(current) / 1000;
+			std::cout << arr[row][col] << '\t';// вывести
+			if (!isFirst) { // если это уже не первое значениемассива
+				if (savedMinimal > arr[row][col]) {
+					savedMinimal = arr[row][col]; // оно сравнивается с сохраненным значением и сохраняется, если меньшее
+					rowNumber = row; // а номер строки запоминается
+				}
+			}
+			else { // а если первое, оно просто записывается как минимальное
+				savedMinimal = arr[row][col];
+				isFirst = false; // и больше сюда не возвращаемся
+			}
+		}
+		std::cout << std::endl;
+	}
+	// выводим минимальное значение
+	std::cout << "\nMinimal value is " << savedMinimal << " in row " << rowNumber + 1 << std::endl;
+	for (size_t i = 0; i < 10; i++) { // обмен строк
+		if (rowNumber != 0) { // если минимальное значение не обнаружено в первой строке
+			bufferRow[i] = arr[rowNumber][i]; // записываем в буфер значения
+			arr[rowNumber][i] = arr[0][i]; // на место этоо значения записывается значение из первой строки, так как будем менять строки местами
+			arr[0][i] = bufferRow[i]; // меняем местами
+		}
+	}
+	// выводим массив с новым расположением строк
+	if (rowNumber !=0) { // если это необходимо
+		std::cout << "New matrix with swapped first and " << rowNumber + 1 << " rows" << std::endl << std::endl;
+		for (size_t row = 0; row < 10; row++) {
+			for (size_t col = 0; col < 10; col++) {
+				std::cout << arr[row][col] << '\t';
+			}
+			std::cout << std::endl;
+		}
+	}
+	else {
+		std::cout << "Minimal value is in first row. Swapping dont needed" << std::endl;
+	}
+}
+
+// ЗАДАЧА 10
+/*
+Подсчитать количество повторений каждого символа, во введенной строке. Таким образом, минимум для каждого = 1. 
+*/
+void charCounter() {
+	clearAndRewrite("Normal dificulty->TASK 10:\n" 
+		"Enter any string. Function will count every symbol how many times it is in this stroke.");
+
+	std::string entered; // сопсна строка
+	std::map <char, int> charSet; // юзанем крутой контейнер для хранения значений символ-количество.
+	std::map <char, int>::iterator it; // итератор для поиска
+	// ввод данных 
+	std::cout << "Enter text to analyze: ";
+	std::cin >> entered;
+	// обработка
+	for (size_t ch = 0; ch < entered.size(); ch++) {
+		if (ch != 0) { // если это не первый символ
+			//it = 
+		}
+		else { // первый символ просто записываем без разговоров
+			charSet[entered[ch]] = 1;
+		}
+
+	}
 }

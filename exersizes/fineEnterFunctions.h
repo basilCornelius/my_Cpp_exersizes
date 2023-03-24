@@ -99,3 +99,9 @@ void enterDynamicMatrixByPointers(int width, int height, int **matrix) {  // при
 		}
 	}
 }
+
+// очистка экрана и перенаписание шапки
+void clearAndRewrite(std::string text) {
+	system("CLS");
+	std::cout << text << std::endl;
+}

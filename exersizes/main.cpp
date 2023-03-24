@@ -194,6 +194,8 @@ char selectNormalTasks() {
 			<< "\t 6) 2d-array filled zigzag\n"
 			<< "\t 7) cubic root, no using special functions\n"
 			<< "\t 8) String morphing\n"
+			<< "\t 9) 10x10 array of random numbers with finding minimal one\n"
+			<< "\t 10) Count every entered symbol in string\n"
 			<< "\t any another symbol or number: back to previous menu"
 			<< endl;
 
@@ -210,6 +212,8 @@ char selectNormalTasks() {
 		case 6: command = doTask(&zigZagArray); break;
 		case 7: command = doTask(&cubicRoot); break;
 		case 8: command = doTask(&stringMorpher); break;
+		case 9: command = doTask(&tenArray); break;
+		case 10: command = doTask(&charCounter); break;
 		default: return 'm';
 		}
 	} while (command == 't'); // "Tasks menu" получаем из функции doTask()
