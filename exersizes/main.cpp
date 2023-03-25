@@ -196,6 +196,8 @@ char selectNormalTasks() {
 			<< "\t 8) String morphing\n"
 			<< "\t 9) 10x10 array of random numbers with finding minimal one\n"
 			<< "\t 10) Count every entered symbol in string\n"
+			<< "\t 11) Find and output all odd numbers from random array\n"
+			<< "\t 12) manage workers\n"
 			<< "\t any another symbol or number: back to previous menu"
 			<< endl;
 
@@ -214,6 +216,8 @@ char selectNormalTasks() {
 		case 8: command = doTask(&stringMorpher); break;
 		case 9: command = doTask(&tenArray); break;
 		case 10: command = doTask(&charCounter); break;
+		case 11: command = doTask(&findOdds); break;
+		case 12: command = doTask(&laborers); break;
 		default: return 'm';
 		}
 	} while (command == 't'); // "Tasks menu" получаем из функции doTask()

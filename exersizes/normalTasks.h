@@ -622,17 +622,244 @@ void charCounter() {
 	std::string entered; // сопсна строка
 	std::map <char, int> charSet; // юзанем крутой контейнер для хранения значений символ-количество.
 	std::map <char, int>::iterator it; // итератор для поиска
+	char current; // буфер для отлавливания символов. 
 	// ввод данных 
-	std::cout << "Enter text to analyze: ";
-	std::cin >> entered;
+	std::cout << "\nEnter text to analyze: ";
+	std::cin.ignore(); // очистить поток от символа конца строки от предыдущих вводов
+	std::getline(std::cin, entered); // вводим строку с пробелами
 	// обработка
 	for (size_t ch = 0; ch < entered.size(); ch++) {
-		if (ch != 0) { // если это не первый символ
-			//it = 
+		current = char(entered[ch]);
+		if (!charSet.empty() || (it = charSet.find(current)) != charSet.end()) { // если это не первый символ и есть такой символ
+			charSet[current]++; // инкреминируем значение по ключу
 		}
-		else { // первый символ просто записываем без разговоров
-			charSet[entered[ch]] = 1;
+		else { // если такого символа нет или контейнер пуст,
+			charSet.insert(std::make_pair(current, 1)); // внедряем новый элемент со значением 1
 		}
-
 	}
+	//вывод
+	std::cout << "\nStatistics for symbols in entered text: " << std::endl << std::endl;
+	for (auto &keyChar : charSet) {
+		if (keyChar.first != ' ') { // для всех символов, не являющихся пробелом
+			std::cout << keyChar.first;
+		}
+		else { // а пробел назовем как положено: "Space"
+			std::cout << "spaces";
+		}
+		std::cout <<  ": " << keyChar.second << std::endl;
+		
+	}
+}
+
+// ЗАДАЧА 11
+/*
+Дан массив размера n, заполнить его случайными числами, Найти все нечётные числа массива...Это правда "normal" сложность? изи же, не?
+*/
+void findOdds() {
+	clearAndRewrite("Normal dificulty->TASK 11:\n" 
+		"Enter count of numbers. Algorythm generates array of randoms and select only odds from it.");
+	//так как в задаче использовано слово "массив", придется использовать массивы. Но я б лучше применил векторы
+	unsigned int n = 0; // размер массива
+	// ввод
+	std::cout << "\nEnter count of numbers: ";
+	std::cin.ignore(); // очистим поток
+	std::cin >> n;
+	// создание массивов
+	int* randoms = new int[n];
+	int* odds = new int[n]; // массив нечетных чисел не может быть больше исходного, верно?
+	//заполнение контейнера и проверка одновременно
+	int oddNum = 0; // итератор для массива нечетных чисел
+	for (size_t i = 0; i < n; i++) {
+		randoms[i] = rand() % 100; // в примере на сайте нет чисел больше 100
+		if (randoms[i] % 2 != 0) { // если это нечетное число
+			odds[oddNum] = randoms[i]; // запишем его в соответствующий массив. 
+			oddNum++;
+		}
+	}
+	//вывод
+	std::cout << "Array:\t";
+	for (size_t i = 0; i < n; i++) {
+		std::cout << randoms[i] << "; ";
+	}
+	std::cout << "\b\b.\nOdds:\t";
+	for (size_t i = 0; i < oddNum; i++) {
+		std::cout << odds[i] << "; ";
+	}
+	std::cout << "\b\b."; // удалить последние "; " и поставить точку
+	// убрать за собой
+	delete [] randoms;
+	delete [] odds;
+}
+
+// ЗАДАЧА 12
+/*
+Разработать программу, в которой будет организовано меню, выбор функций меню должно быть организовано по функциональной клавише. 
+Вся информация должна храниться в массиве структур, с возможностью их записи в файл. Организовать сортировку данных различными методами 
+(быстрая, Шелла, Пузырьковая), вывод результатов сортировки должен быть в табличной форме.
+
+Функции программы:
+
+	функция для ввода данных пользователем;
+	функция для записи данных в файл;
+	чтение данных из файла;
+	вывод данных на экран;
+	дополнение данных;
+	удаление данных;
+	поиск информации по атрибуту;
+	сортировка различными методами;
+
+Таблица «штатное расписание» с полями:
+	«ФИО работника»
+	«кол-во отработанных часов»
+	«должность»
+	«оплата за час работы»
+	«присваиваемый id»
+	вычисляемое поле «зарплата»
+*/
+
+// класс "работяга"
+class Worker { // каждый работяга - класс.
+	std::string firstName; // имя
+	std::string secondName; // фамилия
+	std::string job; // должность
+	unsigned int timeSpent; // отработанные часы
+	float hourPayment; // почасовая плата
+	float salary; // зарплата
+public:
+	Worker() {
+		std::cout << "\nEnter data for new worker.\nFirst name: ";
+		std::getline(std::cin, firstName);
+		std::cout << "Second name: ";
+		std::getline(std::cin, secondName);
+		std::cout << "Job: ";
+		std::getline(std::cin, job);
+		timeSpent = enterInt("Time spent");
+		hourPayment = enterFloat("Hour payment");
+		salary = timeSpent * hourPayment;
+	};
+	//геттеры
+	std::string getFirstName() {
+		if (firstName != "") {
+			return firstName;
+		}
+		else {
+			return "no name";
+		}
+	}
+	std::string getSecondName() {
+		if (secondName != "") {
+			return secondName;
+		}
+		else {
+			return "No second name";
+		}
+	}
+	std::string getJob() {
+		if (job != "") {
+			return job;
+		}
+		else {
+			return "no job data";
+		}
+	}
+	unsigned int getTimeSpent() {
+		if (timeSpent) {
+			return timeSpent;
+		}
+		else {
+			return 0;
+		}
+	}
+	float getHourPayment() {
+		if (hourPayment) {
+			return hourPayment;
+		}
+		else {
+			return 0;
+		}
+	}
+	float getSalary() {
+		if (salary) {
+			return salary;
+		}
+		else {
+			return 0;
+		}
+	}
+	//вывод в консоль
+	void print() {
+		std::cout
+			<< firstName << "\t|\t"
+			<< secondName << "\t|\t"
+			<< job << "\t|\t"
+			<< timeSpent << "\t|\t"
+			<< hourPayment << "\t|\t"
+			<< salary << "\t|\t"
+			<< std::endl;
+	}
+};
+// Объявление спомогательных функций
+char laborersMenu(); // очистка экрана, вывод меню и ввод команды
+Worker newWorker(); // создать нового рабочего
+
+void laborers() {
+	std::vector<Worker> workers; // контейнер для работяг
+	char command; // символ для команды
+	//ввод
+
+	command = laborersMenu();
+	//обработка
+	if (command == 'N') { // если создать нового
+		workers.push_back(newWorker());
+	}
+
+	// уборка
+	workers.clear();
+}
+
+//описание вспомогательных функций:
+
+char laborersMenu() {
+	char command = 0; // команда
+	char avaibleChars[] = { 'N','E','F','D', 'S', 'L', 'V', 'C', 'Q' }; // для проверки, чтобы не плодить if
+	bool isEnteredRight = true;  // для проверок правильности ввода
+	//перезаписать окно
+	clearAndRewrite("Normal dificulty->TASK 12:\n"
+		"Manage workers data, using menu.");
+	//вывод меню
+	std::cout
+		<< "Select action:"
+		<< "\n[N] Add new worker;"
+		<< "\n[E] Edit data;"
+		<< "\n[F] Find worker;"
+		<< "\n[D] Delete worker;"
+		<< "\n[S] Saveto file;"
+		<< "\n[L] load from file;"
+		<< "\n[V] View all workers;"
+		<< "\n[C] Sort data;"
+		<< "\n[Q] quit.";
+	do { // ввод с проверкой на правильность
+		if (!isEnteredRight) {
+			std::cout << "Invalid command. Select from menu. Reenter." << std::endl; // если цикл проверки прокрутился, значит ввели неправильно. Переделать
+		}
+		std::cin.ignore();
+		std::cout << "\nAction: ";
+		command = enterChar();
+		command = toupper(command);
+		for (size_t i = 0; i < sizeof(avaibleChars)/sizeof(*avaibleChars); i++) { // было ли введено что-то из списка
+			if (command!=avaibleChars[i]) {
+				isEnteredRight = false;
+			}
+			else {
+				std::cin.ignore(); // если такое нашлось, идем дальше
+				isEnteredRight = true;
+				break;
+			}
+		}
+	} while (!isEnteredRight);
+	return command;
+}
+Worker newWorker() {
+	Worker worker;
+	return worker;
 }
